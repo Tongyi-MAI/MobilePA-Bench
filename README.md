@@ -22,7 +22,7 @@
 
 <p align="center">
   <a href="https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard">
-    <img src="github-pages/static/images/leaderboard.jpg" alt="MobilePA-Bench leaderboard" width="960">
+    <img src="github-pages/static/images/leaderboard.jpg" alt="MobilePA-Bench leaderboard" width="1100">
   </a>
 </p>
 

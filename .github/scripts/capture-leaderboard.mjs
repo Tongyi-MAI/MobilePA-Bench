@@ -12,7 +12,7 @@ try {
     waitUntil: "networkidle",
   });
 
-  const leaderboard = page.locator("#leaderboard");
+  const leaderboard = page.locator("#leaderboard > .inner");
   await leaderboard.waitFor({ state: "visible" });
   await page.locator("nav").evaluate((element) => {
     element.style.display = "none";
