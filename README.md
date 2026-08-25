@@ -34,8 +34,8 @@
 
 ## News
 
-- **2026-08-25:** The project repository was opened with an interactive project page, leaderboard, task replays, and a private-evaluation entry.
-- **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv.
+- **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).
+- **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv. 
 
 ## Benchmark at a Glance
 
@@ -67,20 +67,6 @@ The evaluator assigns a fixed verification policy to each task. Depending on the
 | **Skill Usage** | Selection and execution of reusable composite procedures instead of rebuilding every workflow from scratch |
 | **Sub-agent Collaboration** | Task decomposition, contextual handoff, and coordination with GUI, search, image, and other specialized agents |
 
-## Leaderboard and Task Explorer
-
-The [project page](https://tongyi-mai.github.io/MobilePA-Bench/) includes:
-
-- a sortable leaderboard covering all four capability dimensions;
-- interactive replays from user intent through execution and verification;
-- representative traces for Tool Use, Memory, Skills, and Sub-agent Collaboration;
-- benchmark statistics and domain coverage.
-
-Leaderboard scores are percentages. The overall score is reported for models with complete coverage and is computed as:
-
-```text
-Overall = 50% Tool Use + 20% Memory + 20% Skills + 10% Sub-agent
-```
 
 ## Private Evaluation
 
