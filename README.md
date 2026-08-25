@@ -39,17 +39,6 @@
 - **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).
 - **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv. 
 
-## Benchmark at a Glance
-
-| Benchmark scale | Value | Capability dimension | Tasks | Score weight |
-| --- | ---: | --- | ---: | ---: |
-| Evaluation tasks | **1,705** | Tool Use | **1,040** | **50%** |
-| Realistic mobile tools | **212** | Memory Usage | **376** | **20%** |
-| Functional domains | **13** | Skill Usage | **200** | **20%** |
-| Level-2 subcategories | **89** | Sub-agent Collaboration | **89** | **10%** |
-| Candidate tools recalled | **N = 15** |  |  |  |
-| Maximum execution steps | **T = 15** |  |  |  |
-
 ## Overview
 
 MobilePA-Bench models a mobile planning agent as a decision-maker operating through structured tools, reusable skills, persistent memory, and specialized sub-agents. The environment executes each action, updates its state, and returns observations or runtime errors that the agent must incorporate into subsequent decisions.
