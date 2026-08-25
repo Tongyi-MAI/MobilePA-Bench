@@ -1,6 +1,12 @@
 name: Deploy public benchmark site
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - github-pages/**
+      - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
 permissions:
