@@ -98,12 +98,40 @@
     if (focusPanel) panel.focus({ preventScroll: true });
   }
 
+  function tabFromHash(tabs) {
+    const targetId = decodeURIComponent(window.location.hash.slice(1));
+    return tabs.find((tab) => tab.dataset.anchor === targetId);
+  }
+
+  function updateHash(tab) {
+    const nextHash = "#" + tab.dataset.anchor;
+    if (window.location.hash !== nextHash) {
+      window.history.pushState(null, "", nextHash);
+    }
+  }
+
+  function scrollToCases() {
+    const section = document.getElementById("cases");
+    const navigation = document.querySelector("nav");
+    if (!section) return;
+
+    window.requestAnimationFrame(() => {
+      const navigationHeight = navigation ? navigation.getBoundingClientRect().height : 0;
+      const top = section.getBoundingClientRect().top + window.scrollY - navigationHeight - 12;
+      window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     const tabs = Array.from(document.querySelectorAll(".case-tab"));
     if (!tabs.length) return;
 
     tabs.forEach((tab, index) => {
-      tab.addEventListener("click", () => renderDimension(tab.dataset.dimension, false));
+      tab.addEventListener("click", () => {
+        updateHash(tab);
+        renderDimension(tab.dataset.dimension, false);
+        scrollToCases();
+      });
       tab.addEventListener("keydown", (event) => {
         let targetIndex = null;
         if (event.key === "ArrowRight") targetIndex = (index + 1) % tabs.length;
@@ -114,10 +142,26 @@
 
         event.preventDefault();
         tabs[targetIndex].focus();
+        updateHash(tabs[targetIndex]);
         renderDimension(tabs[targetIndex].dataset.dimension, false);
+        scrollToCases();
       });
     });
 
-    renderDimension("basic", false);
+    window.addEventListener("hashchange", () => {
+      const targetTab = tabFromHash(tabs);
+      if (targetTab) {
+        renderDimension(targetTab.dataset.dimension, false);
+        scrollToCases();
+      }
+    });
+
+    const initialTab = tabFromHash(tabs);
+    if (initialTab) {
+      renderDimension(initialTab.dataset.dimension, false);
+      scrollToCases();
+    } else {
+      renderDimension("basic", false);
+    }
   });
 })();
