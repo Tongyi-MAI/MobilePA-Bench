@@ -1,0 +1,67 @@
+name: Update leaderboard preview
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - github-pages/index.html
+      - github-pages/static/css/**
+      - github-pages/static/js/leaderboard.js
+      - github-pages/static/js/leaderboard_data.js
+      - .github/scripts/capture-leaderboard.mjs
+      - .github/workflows/update-leaderboard-preview.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: leaderboard-preview
+  cancel-in-progress: true
+
+jobs:
+  update-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install browser runtime
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local project page
+        run: |
+          python3 -m http.server 4180 --directory github-pages > /tmp/mobilepa-bench-preview.log 2>&1 &
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:4180/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/mobilepa-bench-preview.log
+          exit 1
+
+      - name: Capture leaderboard
+        run: node .github/scripts/capture-leaderboard.mjs
+
+      - name: Commit updated preview
+        run: |
+          git add github-pages/static/images/leaderboard.jpg
+          if git diff --cached --quiet; then
+            echo "Leaderboard preview is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update leaderboard preview"
+          git push

@@ -21,7 +21,9 @@
 **MobilePA-Bench** is an interactive, stateful, and tool-centric benchmark for evaluating the tool-calling and planning capabilities of mobile planner agents. It moves beyond static function matching by executing agent actions in a mutable mobile environment and checking both the action trace and the resulting state.
 
 <p align="center">
-  <img src="github-pages/static/images/teaser.png" alt="A MobilePA-Bench task combining memory, skills, tool use, and GUI-agent collaboration" width="960">
+  <a href="https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard">
+    <img src="github-pages/static/images/leaderboard.jpg" alt="MobilePA-Bench leaderboard" width="960">
+  </a>
 </p>
 
 ## Highlights
@@ -70,16 +72,12 @@ The evaluator assigns a fixed verification policy to each task. Depending on the
 
 ## Private Evaluation
 
-We offer a confidential evaluation track for hosted mobile planner agents. Submit an HTTPS, OpenAI-compatible endpoint with tool-calling support, and MobilePA-Bench will evaluate the model across Tool Use, Memory Usage, Skill Usage, and Sub-agent Collaboration.
+We offer a confidential evaluation track for hosted mobile planner agents. Submit an HTTPS, OpenAI-compatible endpoint with tool-calling support, and MobilePA-Bench will evaluate the model across Tool Use, Memory Usage, Skill Usage, and Sub-agent Collaboration. To participate, [request a private evaluation](https://116.62.42.171/login?next=/submit) through our secure submission portal.
 
 - **Confidential by design:** submissions go directly to the dedicated evaluation server; API credentials are never handled by GitHub Pages.
 - **Hidden-test integrity:** benchmark queries, ground truth, and judge credentials remain isolated from submitted models.
 - **Reviewed results:** each completed run is checked before its report is released to the submitting account.
 - **Expected turnaround:** reports are normally returned within three business days, with one request allowed per account every seven days.
-
-[![Request a Private Evaluation](https://img.shields.io/badge/Request-Private_Evaluation-6f42c1?style=for-the-badge)](https://116.62.42.171/login?next=/submit)
-
-> **Release status:** this public repository contains only the project website and public-facing assets. The private evaluation service, hidden benchmark tasks, ground truth, judge credentials, and complete evaluation toolkit are not included. The public benchmark and toolkit are planned for a later release.
 
 ## Citation
 
