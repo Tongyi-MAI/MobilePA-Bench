@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks</title>
+  <meta name="description" content="MobilePA-Bench is an interactive, stateful, tool-centric benchmark for evaluating tool-calling and planning abilities of mobile planner agents across four dimensions.">
+
+  <!-- Local UI dependencies keep the static site independent of external CDNs. -->
+  <link rel="stylesheet" href="static/vendor/bulma/bulma.min.css">
+  <link rel="stylesheet" href="static/vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="static/vendor/tabulator/css/tabulator.min.css">
+  <link rel="stylesheet" href="static/css/style.css?v=compact-intro-20260819">
+  <link rel="stylesheet" href="static/css/replay-demo.css?v=20260817-icons">
+</head>
+<body>
+
+  <!-- ===== sticky nav ===== -->
+  <nav class="nav-mpa">
+    <div class="inner">
+      <span class="brand-tag">MobilePA-Bench</span>
+      <span class="links">
+        <a href="#intro">Introduction</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#demo">Demo</a>
+        <a href="#cases">Task Examples</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#citation">Citation</a>
+        <a href="https://116.62.42.171/login"
+           data-evaluation-path="/login">Evaluation login</a>
+      </span>
+    </div>
+  </nav>
+
+  <!-- ===== hero ===== -->
+  <header class="hero-mpa">
+    <img class="hero-side-art hero-side-art-left" src="static/images/mobilepa-hero-left-v1.png" alt="" aria-hidden="true">
+    <img class="hero-side-art hero-side-art-right" src="static/images/mobilepa-hero-right-v1.png" alt="" aria-hidden="true">
+
+    <div class="hero-eyebrow">Interactive &middot; Stateful &middot; Tool-centric</div>
+    <h1 class="title-main"><span class="brand">MobilePA-Bench</span></h1>
+    <p class="subtitle-main">Benchmarking Mobile Planner Agents on Complex Real-World Tasks</p>
+
+    <div class="authors">MAI Team, Alibaba Token Hub, Alibaba Group</div>
+    <div class="affil"><!-- TODO: replace with full author list --></div>
+
+    <div class="link-buttons">
+      <a class="button" href="https://arxiv.org/pdf/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a>
+      <a class="button" href="https://arxiv.org/abs/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-book-open"></i></span><span>arXiv</span></a>
+      <a class="button" href="https://huggingface.co/papers/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-face-smile"></i></span><span>Hugging Face</span></a>
+      <a class="button" href="https://github.com/Tongyi-MAI/MobilePA-Bench" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span></a>
+      <a class="button" href="#leaderboard"><span class="icon"><i class="fas fa-trophy"></i></span><span>Leaderboard</span></a>
+    </div>
+  </header>
+
+  <!-- ===== private evaluation entry ===== -->
+  <section class="evaluation-entry" aria-labelledby="evaluation-entry-title">
+    <div class="evaluation-entry-copy">
+      <span class="evaluation-entry-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+      <div>
+        <h2 id="evaluation-entry-title">Confidential evaluation for hosted models</h2>
+        <p>
+          Evaluate your model across Tool Use, Memory, Skills, and Sub-agent Collaboration without
+          exposing hidden tasks or ground truth. Submit an HTTPS, OpenAI-compatible endpoint and receive
+          a reviewed report within three business days.
+        </p>
+      </div>
+    </div>
+    <div class="hero-submit-action">
+      <a class="hero-submit-button"
+         href="https://116.62.42.171/login?next=/submit"
+         data-evaluation-path="/login?next=/submit">
+        <span class="hero-submit-icon"><i class="fas fa-paper-plane" aria-hidden="true"></i></span>
+        <span class="hero-submit-copy">
+          <strong>Request a Private Evaluation</strong>
+          <small>One request per account every seven days</small>
+        </span>
+        <i class="fas fa-arrow-right hero-submit-arrow" aria-hidden="true"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== introduction ===== -->
+  <section id="intro" class="section-mpa">
+    <h2 class="sec-title">Introduction</h2>
+    <p class="lead-text">
+      Mobile AI agents are evolving from conversational assistants into planning systems that must carry out
+      multi-step actions across applications, device services, and changing user contexts. Real mobile tasks are
+      inherently stateful: tools have dependencies and permission boundaries, application data changes after every
+      action, user requests may omit important preferences, and successful execution often requires reacting to
+      runtime feedback rather than producing a single static function call. Existing evaluations capture only part
+      of this problem: static function-calling benchmarks rarely execute predicted calls against a persistent
+      environment, while GUI-centric benchmarks underrepresent efficient structured APIs, personalized context,
+      reusable procedures, and coordination with specialized agents. <strong>MobilePA-Bench</strong> addresses this
+      gap with an interactive, stateful, and tool-centric sandbox spanning 1,705 tasks, 212 realistic tools, and 13
+      functional domains. It evaluates <strong>Tool Use</strong> for grounded and recoverable API execution,
+      <strong>Memory Usage</strong> for applying persistent user context, <strong>Skill Usage</strong> for routing to
+      reusable composite procedures, and <strong>Sub-agent Collaboration</strong> for task decomposition and
+      contextual handoffs.
+    </p>
+  </section>
+
+  <!-- ===== leaderboard ===== -->
+  <section id="leaderboard" class="section-mpa alt-bg">
+    <div class="inner">
+      <h2 class="sec-title">Leaderboard</h2>
+      <p class="sec-sub">
+        Overall = 50% Tool Use + 20% Memory + 20% Skills + 10% Sub-agent.
+        Click any column header to sort. Best value per column is highlighted.
+      </p>
+      <div id="leaderboard-table"></div>
+      <p class="sec-sub" style="margin-top:1rem; font-size:.85rem;">
+        All capability values are percentages (%). Overall is reported only for models with complete coverage of all four dimensions.<br>
+        Cost/1K Tasks is estimated from visible output tokens only; input, cached, and hidden reasoning tokens are excluded.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== interactive demo ===== -->
+  <section id="demo" class="section-mpa demo-section" aria-labelledby="replay-title">
+    <div class="benchmark-replay">
+      <div class="replay-heading">
+        <p class="replay-kicker"><span aria-hidden="true"></span> Interactive benchmark replay</p>
+        <h3 id="replay-title">See MobilePA-Bench in Action</h3>
+        <p>From user intent to mobile execution and evidence-based evaluation.</p>
+      </div>
+
+      <div class="replay-console" data-replay-console>
+        <div class="replay-tabs" role="tablist" aria-label="Evaluation policy examples"></div>
+
+        <div class="replay-context">
+          <div class="replay-context-copy">
+            <span class="replay-index" data-replay-index>01 / 03</span>
+            <strong data-replay-title>Exact Tool Call</strong>
+            <span data-replay-summary>Match the selected tool and grounded arguments.</span>
+          </div>
+          <div class="replay-capabilities" data-replay-capabilities aria-label="Capabilities exercised"></div>
+        </div>
+
+        <div class="replay-stage">
+          <section class="replay-lane replay-dialogue" aria-labelledby="replay-dialogue-title">
+            <header class="replay-lane-head">
+              <span class="replay-lane-icon"><i class="fas fa-comments" aria-hidden="true"></i></span>
+              <div><span>Interaction</span><h4 id="replay-dialogue-title">User &amp; Agent</h4></div>
+            </header>
+            <div class="replay-lane-body" data-replay-dialogue></div>
+          </section>
+
+          <section class="replay-lane replay-execution" aria-labelledby="replay-execution-title">
+            <header class="replay-lane-head">
+              <span class="replay-lane-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>
+              <div><span>Execution trace</span><h4 id="replay-execution-title">Planner &amp; Environment</h4></div>
+            </header>
+            <div class="replay-lane-body" data-replay-execution></div>
+          </section>
+
+          <section class="replay-lane replay-evaluation" aria-labelledby="replay-evaluation-title">
+            <header class="replay-lane-head">
+              <span class="replay-lane-icon"><i class="fas fa-shield" aria-hidden="true"></i></span>
+              <div><span>Fixed policy</span><h4 id="replay-evaluation-title">Evidence Checker</h4></div>
+            </header>
+            <div class="replay-policy" data-replay-policy></div>
+            <div class="replay-lane-body" data-replay-checks></div>
+            <div class="replay-event replay-verdict" data-replay-verdict>
+              <span class="replay-verdict-icon"><i class="fas fa-check" aria-hidden="true"></i></span>
+              <div><span>Task outcome</span><strong></strong></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="replay-footer">
+          <div class="replay-progress" aria-hidden="true"><span data-replay-progress></span></div>
+          <div class="replay-status" aria-live="polite" data-replay-status>Ready to replay</div>
+          <div class="replay-controls">
+            <button type="button" data-replay-restart title="Replay this example" aria-label="Replay this example">
+              <i class="fas fa-rotate-right" aria-hidden="true"></i>
+            </button>
+            <button type="button" data-replay-toggle title="Pause replay" aria-label="Pause replay">
+              <i class="fas fa-pause" aria-hidden="true"></i>
+            </button>
+            <button type="button" data-replay-next title="Next example" aria-label="Next example">
+              <i class="fas fa-forward-step" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="replay-noscript">
+          MobilePA-Bench evaluates exact tool grounding, final environment state, and interactive agent behavior
+          with a fixed policy assigned to each task.
+        </div>
+      </noscript>
+      <p class="replay-disclosure">Illustrative public examples; hidden evaluation tasks and ground truth remain private.</p>
+    </div>
+  </section>
+
+  <!-- ===== task examples ===== -->
+  <section id="cases" class="section-mpa alt-bg case-study-section">
+    <div class="inner">
+      <h2 class="sec-title">Task Examples</h2>
+      <p class="sec-sub case-intro">
+        Representative examples show how user requests, model actions, and environment feedback unfold across the four capability dimensions.
+      </p>
+
+      <div class="case-tabs" role="tablist" aria-label="Capability dimension">
+        <button class="case-tab is-active" id="case-tab-basic" type="button" role="tab"
+                aria-selected="true" aria-controls="case-panel" data-dimension="basic">
+          <span>Tool Use</span><span class="case-tab-count">3</span>
+        </button>
+        <button class="case-tab" id="case-tab-memory" type="button" role="tab"
+                aria-selected="false" aria-controls="case-panel" data-dimension="memory" tabindex="-1">
+          <span>Memory</span><span class="case-tab-count">3</span>
+        </button>
+        <button class="case-tab" id="case-tab-skills" type="button" role="tab"
+                aria-selected="false" aria-controls="case-panel" data-dimension="skills" tabindex="-1">
+          <span>Skills</span><span class="case-tab-count">3</span>
+        </button>
+        <button class="case-tab" id="case-tab-subagent" type="button" role="tab"
+                aria-selected="false" aria-controls="case-panel" data-dimension="subagent" tabindex="-1">
+          <span>Sub-agent</span><span class="case-tab-count">3</span>
+        </button>
+      </div>
+
+      <div id="case-panel" class="case-panel" role="tabpanel" aria-labelledby="case-tab-basic" tabindex="0"></div>
+      <noscript><p class="case-noscript">Enable JavaScript to inspect the task interaction traces.</p></noscript>
+    </div>
+  </section>
+
+  <!-- ===== benchmark ===== -->
+  <section id="benchmark" class="section-mpa">
+    <h2 class="sec-title">Benchmark</h2>
+    <p class="sec-sub">Dataset scale, capability balance, and coverage across real mobile scenarios.</p>
+
+    <!-- Benchmark Statistics -->
+    <h3 class="subsec-title">Benchmark Statistics</h3>
+    <p class="subsec-sub">1,705 unique evaluation tasks over 212 realistic tools, spanning 13 functional domains
+       and 89 level-2 subcategories.</p>
+    <div class="mini-stats" style="grid-template-columns:repeat(6,1fr);">
+      <div class="pill"><div class="n">1,705</div><div class="t">Evaluation Tasks</div></div>
+      <div class="pill"><div class="n">212</div><div class="t">Realistic Tools</div></div>
+      <div class="pill"><div class="n">13</div><div class="t">Functional Domains</div></div>
+      <div class="pill"><div class="n">89</div><div class="t">Subcategories</div></div>
+      <div class="pill"><div class="n">N=15</div><div class="t">Candidate Recall</div></div>
+      <div class="pill"><div class="n">T=15</div><div class="t">Max Steps</div></div>
+    </div>
+
+    <div class="dim-dist">
+      <div class="cap">Tasks per capability dimension</div>
+      <div class="row">
+        <div class="item"><div class="n">1,040</div><div class="t">Tool Use</div></div>
+        <div class="item"><div class="n">376</div><div class="t">Memory Usage</div></div>
+        <div class="item"><div class="n">200</div><div class="t">Skill Usage</div></div>
+        <div class="item"><div class="n">89</div><div class="t">Sub-agent Collaboration</div></div>
+      </div>
+    </div>
+
+    <div class="bstat-grid">
+      <figure class="fig-block">
+        <img src="static/images/query_sunburst.png" alt="Hierarchical distribution of benchmark task queries">
+        <figcaption>Hierarchical distribution of MobilePA-Bench task queries. The inner circle partitions tasks
+        into 13 high-level mobile scenarios, while the outer ring details 89 level-2 functional subcategories.</figcaption>
+      </figure>
+      <div>
+        <table class="domain-compact">
+          <thead><tr><th>Tool Domain</th><th class="n">#Tools</th></tr></thead>
+          <tbody>
+            <tr><td>Audio &amp; Entertainment</td><td class="n">25</td></tr>
+            <tr><td>Apps &amp; Storage</td><td class="n">23</td></tr>
+            <tr><td>Display &amp; Sound</td><td class="n">22</td></tr>
+            <tr><td>System Settings</td><td class="n">22</td></tr>
+            <tr><td>Time Management</td><td class="n">16</td></tr>
+            <tr><td>AI Assistant</td><td class="n">16</td></tr>
+            <tr><td>Calls &amp; Communication</td><td class="n">15</td></tr>
+            <tr><td>Network &amp; Connectivity</td><td class="n">14</td></tr>
+            <tr><td>Travel &amp; Lifestyle</td><td class="n">13</td></tr>
+            <tr><td>Devices &amp; Cross-device</td><td class="n">13</td></tr>
+            <tr><td>Input &amp; Interaction</td><td class="n">12</td></tr>
+            <tr><td>Utilities &amp; Productivity</td><td class="n">11</td></tr>
+            <tr><td>Security &amp; Privacy</td><td class="n">10</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== citation ===== -->
+  <section id="citation" class="section-mpa">
+    <h2 class="sec-title">Citation</h2>
+    <p class="sec-sub">If you find MobilePA-Bench useful, please consider citing:</p>
+    <pre class="bibtex-box">@article{mobilepabench2026,
+  title   = {MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks},
+  author  = {MAI Team, Alibaba Token Hub, Alibaba Group},
+  journal = {arXiv preprint arXiv:2608.23035},
+  year    = {2026}
+}</pre>
+  </section>
+
+  <footer class="footer-mpa">
+    &copy; 2026 MobilePA-Bench &middot; MAI Team, Alibaba Token Hub, Alibaba Group. &nbsp;
+    Page template inspired by <a href="https://video-mme.github.io/home_page.html" target="_blank">Video-MME</a>.
+  </footer>
+
+  <!-- ===== scripts ===== -->
+  <script src="static/js/site_config.js"></script>
+  <script src="static/js/replay_demo_data.js?v=capability-order-20260819"></script>
+  <script src="static/js/replay_demo.js"></script>
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/tabulator/js/tabulator.min.js"></script>
+  <script src="static/js/leaderboard_data.js?v=v1.5-output-cost-20260820"></script>
+  <script src="static/js/leaderboard.js?v=output-cost-20260820"></script>
+  <script src="static/js/case_studies_data.js?v=capability-order-20260819"></script>
+  <script src="static/js/case_studies.js"></script>
+</body>
+</html>
