@@ -64,10 +64,10 @@ The evaluator assigns a fixed verification policy to each task. Depending on the
 
 | Dimension | What it measures |
 | --- | --- |
-| **[Tool Use](https://tongyi-mai.github.io/MobilePA-Bench/#tool-use-examples)** | Grounded tool selection, argument construction, ordered execution, recovery, and safe refusal |
-| **[Memory](https://tongyi-mai.github.io/MobilePA-Bench/#memory-examples)** | Retrieval and application of user profiles, preferences, routines, history, and situational context |
-| **[Skill](https://tongyi-mai.github.io/MobilePA-Bench/#skill-examples)** | Selection and execution of reusable composite procedures instead of rebuilding every workflow from scratch |
-| **[Sub-agent](https://tongyi-mai.github.io/MobilePA-Bench/#sub-agent-examples)** | Task decomposition, contextual handoff, and coordination with GUI, search, image, and other specialized agents |
+| [Tool Use](https://tongyi-mai.github.io/MobilePA-Bench/#tool-use-examples) | Grounded tool selection, argument construction, ordered execution, recovery, and safe refusal |
+| [Memory](https://tongyi-mai.github.io/MobilePA-Bench/#memory-examples) | Retrieval and application of user profiles, preferences, routines, history, and situational context |
+| [Skill](https://tongyi-mai.github.io/MobilePA-Bench/#skill-examples) | Selection and execution of reusable composite procedures instead of rebuilding every workflow from scratch |
+| [Sub-agent](https://tongyi-mai.github.io/MobilePA-Bench/#sub-agent-examples) | Task decomposition, contextual handoff, and coordination with GUI, search, image, and other specialized agents |
 
 
 ## Private Evaluation
