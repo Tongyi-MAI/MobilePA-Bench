@@ -6,7 +6,8 @@
 
 [Project Page](https://tongyi-mai.github.io/MobilePA-Bench/) ·
 [Leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard) ·
-[Paper](https://arxiv.org/abs/2608.23035) ·
+[Paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf) ·
+[arXiv](https://arxiv.org/abs/2608.23035) ·
 [Hugging Face](https://huggingface.co/papers/2608.23035) ·
 [Private Evaluation](https://116.62.42.171/login?next=/submit) ·
 [Issues](https://github.com/Tongyi-MAI/MobilePA-Bench/issues)
@@ -18,7 +19,9 @@
 
 </div>
 
-**MobilePA-Bench** is an interactive, stateful, and tool-centric benchmark for evaluating the tool-calling and planning capabilities of mobile planner agents. It moves beyond static function matching by executing agent actions in a mutable mobile environment and checking both the action trace and the resulting state.
+**MobilePA-Bench** evaluates central mobile planner agents that coordinate structured tools, persistent user context, reusable skills, and specialized sub-agents. Its stateful simulated environment executes every action and records the resulting calls, state changes, and observable behavior, allowing task completion to be evaluated together with capability-specific requirements.
+
+## Main Results
 
 <p align="center">
   <a href="https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard">
@@ -26,24 +29,31 @@
   </a>
 </p>
 
+- No model leads all four capability dimensions; the full capability vector is therefore more informative than Overall alone.
+- Sub-agent Collaboration has the lowest cross-model mean (**54.18%**), while Skill Usage has the widest observed range (**39.50 points**).
+- An exploratory online-RL checkpoint initialized from Qwen3.8-27B improves Overall from **66.94%** to **69.25%** (**+2.31 points**) in the same sandbox.
+
 ## Highlights
 
-- **Executable and stateful:** tool calls run against an environment whose application data, permissions, and device state evolve after every action.
-- **Broad mobile coverage:** 1,705 evaluation tasks exercise 212 realistic tools across 13 functional domains and 89 subcategories.
-- **Four capability dimensions:** Tool Use, Memory Usage, Skill Usage, and Sub-agent Collaboration.
-- **Evidence-based evaluation:** fixed policies verify tool selection, grounded arguments, execution order, final environment state, and agent behavior.
-- **Realistic failure modes:** agents must handle tool dependencies, permission boundaries, conflicting requests, runtime errors, and incomplete user context.
+- **Unified capability coverage:** Tool Use, Memory Usage, Skill Usage, and Sub-agent Collaboration are evaluated through a shared mobile protocol.
+- **Executable and stateful:** 212 mobile tools operate over mutable application records, dependencies, and structured runtime feedback.
+- **Evidence-aligned verification:** every query is assigned a fixed Tool Call, State Change, or Agent Behavior checker according to its completion semantics.
+- **Capability-gated evaluation:** Memory tasks enforce annotated retrieval and action requirements; Skill-Only Routing requires a complete skill route before business-tool use.
+- **Diagnostic scale:** 1,705 distinct queries span eight descriptive query domains and 30 subclasses, producing 1,905 scored trajectories per model.
+- **Broad model study:** 14 open- and closed-weight frontier LLMs are evaluated with the same reference harness and function-calling interface.
+- **Planner development:** the same sandbox supports online reinforcement learning; an exploratory Qwen3.8-27B checkpoint improves Overall by 2.31 percentage points.
 
 ## News
 
+- **2026-10-19:** Updated the [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and documentation for the revised [paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf), including evidence-aligned verification, capability gates, 1,905 scored trajectories per model, full-cohort analysis of 14 frontier LLMs, and an exploratory online-RL baseline.
 - **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).
-- **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv. 
+- **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv.
 
 ## Overview
 
-MobilePA-Bench models a mobile planning agent as a decision-maker operating through structured tools, reusable skills, persistent memory, and specialized sub-agents. The environment executes each action, updates its state, and returns observations or runtime errors that the agent must incorporate into subsequent decisions.
+MobilePA-Bench models a central mobile planner operating through structured tools, persistent memory, reusable skills, and specialized sub-agents. The simulated environment maintains application records and operational logs, enforces dependencies and argument rules, and returns structured feedback after every action.
 
-The evaluator assigns a fixed verification policy to each task. Depending on the task, success can require an exact tool call, a target state transition, a prescribed action order, or a valid collaboration pattern. This makes the benchmark sensitive to whether an agent actually completes a request—not merely whether it produces a plausible-looking response.
+The evaluator assigns each query one fixed primary checker: **Tool Call** for deterministic operational requirements, **State Change** when multiple valid paths reach the same outcome, or **Agent Behavior** for routing, handoff, clarification, and user-facing interaction. Memory and SOR Skill tasks additionally apply capability gates, separating missing resource or procedural requirements from downstream execution failures.
 
 <p align="center">
   <img src="github-pages/static/images/overview.png" alt="MobilePA-Bench architecture" width="960">
@@ -53,10 +63,10 @@ The evaluator assigns a fixed verification policy to each task. Depending on the
 
 | Dimension | What it measures |
 | --- | --- |
-| [Tool Use](https://tongyi-mai.github.io/MobilePA-Bench/#tool-use-examples) | Grounded tool selection, argument construction, ordered execution, recovery, and safe refusal |
-| [Memory](https://tongyi-mai.github.io/MobilePA-Bench/#memory-examples) | Retrieval and application of user profiles, preferences, routines, history, and situational context |
-| [Skills](https://tongyi-mai.github.io/MobilePA-Bench/#skill-examples) | Selection and execution of reusable composite procedures instead of rebuilding every workflow from scratch |
-| [Sub-agent](https://tongyi-mai.github.io/MobilePA-Bench/#sub-agent-examples) | Task decomposition, contextual handoff, and coordination with GUI, search, image, and other specialized agents |
+| [Tool Use](https://tongyi-mai.github.io/MobilePA-Bench/#tool-use-examples) | Tool and parameter grounding, dependency planning, state tracking, intent revision, boundary handling, and error recovery |
+| [Memory](https://tongyi-mai.github.io/MobilePA-Bench/#memory-examples) | Retrieval and maintenance of persistent user context together with compliant downstream task execution |
+| [Skills](https://tongyi-mai.github.io/MobilePA-Bench/#skill-examples) | Task completion under Skill-Only Routing and Mixed Tool-Skill Routing, with route loading required only in SOR |
+| [Sub-agent](https://tongyi-mai.github.io/MobilePA-Bench/#sub-agent-examples) | Planner-side routing, contextual handoff, and follow-up with GUI, image, search, and other specialized agents |
 
 
 ## Private Evaluation

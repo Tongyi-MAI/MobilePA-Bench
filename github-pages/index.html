@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks</title>
-  <meta name="description" content="MobilePA-Bench is an interactive, stateful, tool-centric benchmark for evaluating tool-calling and planning abilities of mobile planner agents across four dimensions.">
+  <meta name="description" content="MobilePA-Bench evaluates central mobile planner agents across Tool Use, Memory Usage, Skill Usage, and Sub-agent Collaboration in a shared stateful environment.">
 
   <!-- Local UI dependencies keep the static site independent of external CDNs. -->
   <link rel="stylesheet" href="static/vendor/bulma/bulma.min.css">
   <link rel="stylesheet" href="static/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="static/vendor/tabulator/css/tabulator.min.css">
-  <link rel="stylesheet" href="static/css/style.css?v=compact-intro-20260819">
+  <link rel="stylesheet" href="static/css/style.css?v=affiliation-logo-20261019">
   <link rel="stylesheet" href="static/css/replay-demo.css?v=20260817-icons">
 </head>
 <body>
@@ -18,22 +18,20 @@
   <!-- ===== sticky nav ===== -->
   <nav class="nav-mpa">
     <div class="inner">
-      <span class="brand-tag">MobilePA-Bench</span>
+      <a class="brand-tag" href="#top">MobilePA-Bench</a>
       <span class="links">
-        <a href="#intro">Introduction</a>
         <a href="#leaderboard">Leaderboard</a>
+        <a href="#intro">Overview</a>
         <a href="#demo">Demo</a>
-        <a href="#cases">Task Examples</a>
+        <a href="#cases">Examples</a>
         <a href="#benchmark">Benchmark</a>
         <a href="#citation">Citation</a>
-        <a href="https://116.62.42.171/login"
-           data-evaluation-path="/login">Evaluation login</a>
       </span>
     </div>
   </nav>
 
   <!-- ===== hero ===== -->
-  <header class="hero-mpa">
+  <header id="top" class="hero-mpa">
     <img class="hero-side-art hero-side-art-left" src="static/images/mobilepa-hero-left-v1.png" alt="" aria-hidden="true">
     <img class="hero-side-art hero-side-art-right" src="static/images/mobilepa-hero-right-v1.png" alt="" aria-hidden="true">
 
@@ -41,78 +39,118 @@
     <h1 class="title-main"><span class="brand">MobilePA-Bench</span></h1>
     <p class="subtitle-main">Benchmarking Mobile Planner Agents on Complex Real-World Tasks</p>
 
-    <div class="authors">MAI Team, Alibaba Token Hub, Alibaba Group</div>
-    <div class="affil"><!-- TODO: replace with full author list --></div>
+    <div class="authors">Yi Zhu<sup>*</sup>, Xiongwei Wu<sup>*</sup>, Qiyi Wang<sup>&ddagger;</sup>, Tingyu Qu, Jiajun Liu, Sihan Cao, Long Chen, Weigao Sun, Feida Zhu<sup>&sect;</sup>, Yiran Zhong<sup>&sect;</sup>, Steven Hoi</div>
+    <div class="affil">
+      <span class="affil-identity">
+        <img class="affil-logo" src="static/images/logo.png" alt="Qwen">
+        <span>MAI Team, Alibaba Token Hub, Alibaba Group</span>
+      </span>
+      <span class="affil-notes"><sup>*</sup>Equal contribution &middot; <sup>&ddagger;</sup>Research intern &middot; <sup>&sect;</sup>Project lead</span>
+    </div>
 
     <div class="link-buttons">
-      <a class="button" href="https://arxiv.org/pdf/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a>
+      <a class="button" href="MobilePA-Bench.pdf" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a>
       <a class="button" href="https://arxiv.org/abs/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-book-open"></i></span><span>arXiv</span></a>
       <a class="button" href="https://huggingface.co/papers/2608.23035" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fas fa-face-smile"></i></span><span>Hugging Face</span></a>
       <a class="button" href="https://github.com/Tongyi-MAI/MobilePA-Bench" target="_blank" rel="noopener noreferrer"><span class="icon"><i class="fab fa-github"></i></span><span>GitHub</span></a>
       <a class="button" href="#leaderboard"><span class="icon"><i class="fas fa-trophy"></i></span><span>Leaderboard</span></a>
     </div>
-  </header>
-
-  <!-- ===== private evaluation entry ===== -->
-  <section class="evaluation-entry" aria-labelledby="evaluation-entry-title">
-    <div class="evaluation-entry-copy">
-      <span class="evaluation-entry-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
-      <div>
-        <h2 id="evaluation-entry-title">Confidential evaluation for hosted models</h2>
-        <p>
-          Evaluate your model across Tool Use, Memory, Skills, and Sub-agent Collaboration without
-          exposing hidden tasks or ground truth. Submit an HTTPS, OpenAI-compatible endpoint and receive
-          a reviewed report within three business days.
-        </p>
-      </div>
-    </div>
-    <div class="hero-submit-action">
-      <a class="hero-submit-button"
+    <div class="private-evaluation-cta">
+      <span class="private-evaluation-label">
+        <i class="fas fa-shield-halved" aria-hidden="true"></i>
+        Evaluating a hosted model?
+      </span>
+      <a class="private-evaluation-button"
          href="https://116.62.42.171/login?next=/submit"
          data-evaluation-path="/login?next=/submit">
-        <span class="hero-submit-icon"><i class="fas fa-paper-plane" aria-hidden="true"></i></span>
-        <span class="hero-submit-copy">
+        <span>
           <strong>Request a Private Evaluation</strong>
-          <small>One request per account every seven days</small>
+          <small>Secure evaluation across all four capabilities</small>
         </span>
-        <i class="fas fa-arrow-right hero-submit-arrow" aria-hidden="true"></i>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
-  </section>
+  </header>
 
-  <!-- ===== introduction ===== -->
-  <section id="intro" class="section-mpa">
-    <h2 class="sec-title">Introduction</h2>
-    <p class="lead-text">
-      Mobile AI agents are evolving from conversational assistants into planning systems that must carry out
-      multi-step actions across applications, device services, and changing user contexts. Real mobile tasks are
-      inherently stateful: tools have dependencies and permission boundaries, application data changes after every
-      action, user requests may omit important preferences, and successful execution often requires reacting to
-      runtime feedback rather than producing a single static function call. Existing evaluations capture only part
-      of this problem: static function-calling benchmarks rarely execute predicted calls against a persistent
-      environment, while GUI-centric benchmarks underrepresent efficient structured APIs, personalized context,
-      reusable procedures, and coordination with specialized agents. <strong>MobilePA-Bench</strong> addresses this
-      gap with an interactive, stateful, and tool-centric sandbox spanning 1,705 tasks, 212 realistic tools, and 13
-      functional domains. It evaluates <strong>Tool Use</strong> for grounded and recoverable API execution,
-      <strong>Memory Usage</strong> for applying persistent user context, <strong>Skill Usage</strong> for routing to
-      reusable composite procedures, and <strong>Sub-agent Collaboration</strong> for task decomposition and
-      contextual handoffs.
-    </p>
+  <!-- ===== benchmark snapshot ===== -->
+  <section class="snapshot-strip" aria-label="MobilePA-Bench at a glance">
+    <div class="snapshot-item"><strong>1,705</strong><span>Distinct queries</span></div>
+    <div class="snapshot-item"><strong>1,905</strong><span>Scored trajectories / model</span></div>
+    <div class="snapshot-item"><strong>212</strong><span>Executable mobile tools</span></div>
+    <div class="snapshot-item"><strong>4</strong><span>Planner capabilities</span></div>
   </section>
 
   <!-- ===== leaderboard ===== -->
   <section id="leaderboard" class="section-mpa alt-bg">
     <div class="inner">
+      <p class="section-kicker">Main results</p>
       <h2 class="sec-title">Leaderboard</h2>
       <p class="sec-sub">
         Overall = 50% Tool Use + 20% Memory + 20% Skills + 10% Sub-agent.
-        Click any column header to sort. Best value per column is highlighted.
+        Scores follow the revised setting-specific success criteria. Click any column header to sort.
       </p>
+      <div class="leader-highlights" aria-label="Leading benchmark results">
+        <div><span>Overall</span><strong>76.87</strong><small>GPT-6-Astra</small></div>
+        <div><span>Tool Use</span><strong>77.60</strong><small>Claude-Opus-5</small></div>
+        <div><span>Memory</span><strong>76.33</strong><small>Claude-Fable-5</small></div>
+        <div><span>Skills</span><strong>93.25</strong><small>GPT-6-Astra</small></div>
+        <div><span>Sub-agent</span><strong>68.54</strong><small>Claude-Fable-5</small></div>
+      </div>
       <div id="leaderboard-table"></div>
       <p class="sec-sub" style="margin-top:1rem; font-size:.85rem;">
-        All capability values are percentages (%). Overall is reported only for models with complete coverage of all four dimensions.<br>
-        Cost/1K Tasks is estimated from visible output tokens only; input, cached, and hidden reasoning tokens are excluded.
+        All values are percentages (%). Skills averages success under Skill-Only Routing and Mixed Tool-Skill Routing.
+        Best value per column is highlighted. The table reproduces the revised paper's main results.
       </p>
+    </div>
+  </section>
+
+  <!-- ===== introduction ===== -->
+  <section id="intro" class="section-mpa overview-section">
+    <p class="section-kicker">Benchmark overview</p>
+    <h2 class="sec-title">One Environment. Four Planner Capabilities.</h2>
+    <p class="lead-text">
+      Mobile planning requires a central agent to coordinate tools, persistent user context, reusable procedures,
+      and specialized sub-agents while adapting to execution feedback. <strong>MobilePA-Bench</strong> evaluates
+      these abilities through 1,705 distinct queries, eight descriptive query domains, and 212 mobile tools in a
+      shared stateful simulated environment. Its unified protocol covers <strong>Tool Use</strong>,
+      <strong>Memory Usage</strong>, <strong>Skill Usage</strong>, and <strong>Sub-agent Collaboration</strong>.
+      Each query receives a fixed Tool Call, State Change, or Agent Behavior checker, while capability gates enforce
+      applicable memory and skill-routing requirements. This separates successful task completion from compliance
+      with prescribed resource and procedural requirements, exposing failure stages that aggregate success alone
+      cannot diagnose.
+    </p>
+
+    <figure class="overview-figure">
+      <a href="static/images/overview.png" target="_blank" rel="noopener noreferrer" aria-label="Open the MobilePA-Bench overview figure at full resolution">
+        <img src="static/images/overview.png" alt="MobilePA-Bench connects a mobile planner agent with tool execution, mutable environment state, feedback, and three evidence-based success checkers">
+      </a>
+      <figcaption>
+        MobilePA-Bench closes the loop between planning, executable tools, mutable mobile state, environment feedback,
+        and fixed evidence-based evaluation policies.
+      </figcaption>
+    </figure>
+
+    <div class="capability-grid" aria-label="Explore task examples by capability">
+      <a class="capability-card tool" href="#tool-use-examples">
+        <span class="capability-icon"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
+        <span><strong>Tool Use</strong><small>Select and ground executable mobile APIs.</small></span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="capability-card memory" href="#memory-examples">
+        <span class="capability-icon"><i class="fas fa-database" aria-hidden="true"></i></span>
+        <span><strong>Memory Usage</strong><small>Retrieve persistent context and act on it.</small></span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="capability-card skill" href="#skill-examples">
+        <span class="capability-icon"><i class="fas fa-route" aria-hidden="true"></i></span>
+        <span><strong>Skill Usage</strong><small>Follow reusable procedures under SOR and MTSR.</small></span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      <a class="capability-card subagent" href="#sub-agent-examples">
+        <span class="capability-icon"><i class="fas fa-people-arrows" aria-hidden="true"></i></span>
+        <span><strong>Sub-agent Collaboration</strong><small>Delegate and integrate specialized execution.</small></span>
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
     </div>
   </section>
 
@@ -230,38 +268,41 @@
   <!-- ===== benchmark ===== -->
   <section id="benchmark" class="section-mpa">
     <h2 class="sec-title">Benchmark</h2>
-    <p class="sec-sub">Dataset scale, capability balance, and coverage across real mobile scenarios.</p>
+    <p class="sec-sub">Distinct queries, scored trajectories, capability balance, and mobile action coverage.</p>
 
     <!-- Benchmark Statistics -->
     <h3 class="subsec-title">Benchmark Statistics</h3>
-    <p class="subsec-sub">1,705 unique evaluation tasks over 212 realistic tools, spanning 13 functional domains
-       and 89 level-2 subcategories.</p>
+    <p class="subsec-sub">1,705 distinct queries produce 1,905 scored trajectories per model because each of the
+       200 Skill queries is evaluated under both SOR and MTSR.</p>
     <div class="mini-stats" style="grid-template-columns:repeat(6,1fr);">
-      <div class="pill"><div class="n">1,705</div><div class="t">Evaluation Tasks</div></div>
-      <div class="pill"><div class="n">212</div><div class="t">Realistic Tools</div></div>
-      <div class="pill"><div class="n">13</div><div class="t">Functional Domains</div></div>
-      <div class="pill"><div class="n">89</div><div class="t">Subcategories</div></div>
-      <div class="pill"><div class="n">N=15</div><div class="t">Candidate Recall</div></div>
-      <div class="pill"><div class="n">T=15</div><div class="t">Max Steps</div></div>
+      <div class="pill"><div class="n">1,705</div><div class="t">Distinct Queries</div></div>
+      <div class="pill"><div class="n">1,905</div><div class="t">Scored Trajectories / Model</div></div>
+      <div class="pill"><div class="n">212</div><div class="t">Mobile Tools</div></div>
+      <div class="pill"><div class="n">8</div><div class="t">Query Domains</div></div>
+      <div class="pill"><div class="n">30</div><div class="t">Query Subclasses</div></div>
+      <div class="pill"><div class="n">13</div><div class="t">Tool Domains</div></div>
     </div>
 
     <div class="dim-dist">
-      <div class="cap">Tasks per capability dimension</div>
+      <div class="cap">Distinct queries and scored trajectories per capability</div>
       <div class="row">
         <div class="item"><div class="n">1,040</div><div class="t">Tool Use</div></div>
         <div class="item"><div class="n">376</div><div class="t">Memory Usage</div></div>
-        <div class="item"><div class="n">200</div><div class="t">Skill Usage</div></div>
+        <div class="item"><div class="n">200 &times; 2</div><div class="t">Skill Usage (400 trajectories)</div></div>
         <div class="item"><div class="n">89</div><div class="t">Sub-agent Collaboration</div></div>
       </div>
     </div>
 
-    <div class="bstat-grid">
-      <figure class="fig-block">
-        <img src="static/images/query_sunburst.png" alt="Hierarchical distribution of benchmark task queries">
-        <figcaption>Hierarchical distribution of MobilePA-Bench task queries. The inner circle partitions tasks
-        into 13 high-level mobile scenarios, while the outer ring details 89 level-2 functional subcategories.</figcaption>
-      </figure>
-      <div>
+    <figure class="fig-block benchmark-coverage-figure">
+      <img src="static/images/benchmark_statistics.png" alt="MobilePA-Bench query domains, domain distribution, and capability composition">
+      <figcaption>Descriptive coverage of 1,705 queries. The eight query domains and 30 subclasses describe user-task
+      coverage and are separate from both the four scored capabilities and the 13-domain tool inventory.</figcaption>
+    </figure>
+
+    <h3 class="subsec-title">Tool Inventory</h3>
+    <p class="subsec-sub">The stateful environment exposes 212 executable APIs across 13 tool domains. This tool
+      taxonomy organizes action interfaces and is distinct from the query coverage taxonomy above.</p>
+    <div class="tool-inventory-table">
         <table class="domain-compact">
           <thead><tr><th>Tool Domain</th><th class="n">#Tools</th></tr></thead>
           <tbody>
@@ -280,8 +321,13 @@
             <tr><td>Security &amp; Privacy</td><td class="n">10</td></tr>
           </tbody>
         </table>
-      </div>
     </div>
+
+    <h3 class="subsec-title">Evaluation Protocol</h3>
+    <p class="subsec-sub protocol-copy">Non-Skill tasks expose 15 candidate tools. Skill-Only Routing exposes 20
+      candidate skills without direct business tools; Mixed Tool-Skill Routing exposes 15 direct tools plus five
+      candidate skills. Every trajectory runs for at most 15 steps. Missing or invalid predictions count as failures,
+      and API-judged outcomes require a unanimous decision from two fixed judges.</p>
 
   </section>
 
@@ -291,7 +337,7 @@
     <p class="sec-sub">If you find MobilePA-Bench useful, please consider citing:</p>
     <pre class="bibtex-box">@article{mobilepabench2026,
   title   = {MobilePA-Bench: Benchmarking Mobile Planner Agents on Complex Real-World Tasks},
-  author  = {MAI Team, Alibaba Token Hub, Alibaba Group},
+  author  = {Zhu, Yi and Wu, Xiongwei and Wang, Qiyi and Qu, Tingyu and Liu, Jiajun and Cao, Sihan and Chen, Long and Sun, Weigao and Zhu, Feida and Zhong, Yiran and Hoi, Steven},
   journal = {arXiv preprint arXiv:2608.23035},
   year    = {2026}
 }</pre>
@@ -308,8 +354,8 @@
   <script src="static/js/replay_demo.js"></script>
   <script src="static/vendor/jquery/jquery.min.js"></script>
   <script src="static/vendor/tabulator/js/tabulator.min.js"></script>
-  <script src="static/js/leaderboard_data.js?v=v1.5-output-cost-20260820"></script>
-  <script src="static/js/leaderboard.js?v=output-cost-20260820"></script>
+  <script src="static/js/leaderboard_data.js?v=paper-revision-20261019"></script>
+  <script src="static/js/leaderboard.js?v=paper-revision-20261019"></script>
   <script src="static/js/case_studies_data.js?v=capability-order-20260819"></script>
   <script src="static/js/case_studies.js?v=deep-links-position3-20260826"></script>
 </body>

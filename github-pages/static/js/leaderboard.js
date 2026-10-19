@@ -22,11 +22,6 @@
     };
   }
 
-  function costFormatter(cell) {
-    const value = cell.getValue();
-    return value === null || value === undefined ? "-" : "$" + value.toFixed(2);
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     const data = LEADERBOARD_DATA.slice();
     const best = computeBest(data);
@@ -45,19 +40,19 @@
           formatter: function (cell) { return cell.getRow().getPosition(true); },
         },
         {
-          title: "Model", field: "model", minWidth: 170, hozAlign: "left", headerHozAlign: "left",
+          title: "Model", field: "model", minWidth: 165, hozAlign: "left", headerHozAlign: "left",
           formatter: function (cell) {
             const d = cell.getRow().getData();
             return "<span class='model-name'>" + d.model + "</span>" +
                    "<span class='model-org'>" + d.org + "</span>";
           },
         },
-        { title: "Overall", field: "overall", width: 105, sorter: "number", formatter: pctFormatter(best, "overall"), cssClass: "col-overall" },
+        { title: "Size / Access", field: "access", minWidth: 115, headerSort: false },
+        { title: "Overall", field: "overall", width: 95, sorter: "number", formatter: pctFormatter(best, "overall"), cssClass: "col-overall" },
         { title: "Tool Use", field: "basic", sorter: "number", formatter: pctFormatter(best, "basic") },
         { title: "Memory", field: "memory", sorter: "number", formatter: pctFormatter(best, "memory") },
         { title: "Skills", field: "skills", sorter: "number", formatter: pctFormatter(best, "skills") },
         { title: "Sub-agent", field: "subagent", sorter: "number", formatter: pctFormatter(best, "subagent") },
-        { title: "Cost/1K Tasks", field: "costPer1k", width: 130, sorter: "number", formatter: costFormatter },
       ],
     });
   });
