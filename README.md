@@ -30,8 +30,8 @@
 </p>
 
 - No model leads all four capability dimensions; the full capability vector is therefore more informative than Overall alone.
-- Sub-agent Collaboration has the lowest cross-model mean (**54.18%**), while Skill Usage has the widest observed range (**39.50 points**).
-- An exploratory online-RL checkpoint initialized from Qwen3.8-27B improves Overall from **66.94%** to **69.25%** (**+2.31 points**) in the same sandbox.
+- Sub-agent Collaboration has the lowest cross-model mean (**53.71%**), while Skill Usage has the widest observed range (**39.50 points**).
+- An exploratory online-RL checkpoint initialized from Qwen-3.8-27B improves Overall from **66.94%** to **69.25%** (**+2.31 points**) in the same sandbox.
 
 ## Highlights
 
@@ -40,12 +40,13 @@
 - **Evidence-aligned verification:** every query is assigned a fixed Tool Call, State Change, or Agent Behavior checker according to its completion semantics.
 - **Capability-gated evaluation:** Memory tasks enforce annotated retrieval and action requirements; Skill-Only Routing requires a complete skill route before business-tool use.
 - **Diagnostic scale:** 1,705 distinct queries span eight descriptive query domains and 30 subclasses, producing 1,905 scored trajectories per model.
-- **Broad model study:** 14 open- and closed-weight frontier LLMs are evaluated with the same reference harness and function-calling interface.
-- **Planner development:** the same sandbox supports online reinforcement learning; an exploratory Qwen3.8-27B checkpoint improves Overall by 2.31 percentage points.
+- **Broad model study:** 20 open- and closed-weight frontier LLMs are evaluated with the same reference harness and function-calling interface.
+- **Planner development:** the same sandbox supports online reinforcement learning; an exploratory Qwen-3.8-27B checkpoint improves Overall by 2.31 percentage points.
 
 ## News
 
-- **2026-10-19:** Updated the [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and documentation for the revised [paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf), including evidence-aligned verification, capability gates, 1,905 scored trajectories per model, full-cohort analysis of 14 frontier LLMs, and an exploratory online-RL baseline.
+- **2026-10-21:** Expanded the public leaderboard to 20 models and synchronized the project page and README results.
+- **2026-10-19:** Updated the [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and documentation for the revised [paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf), including evidence-aligned verification, capability gates, 1,905 scored trajectories per model, expanded frontier-model analysis, and an exploratory online-RL baseline.
 - **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).
 - **2026-08-24:** The [MobilePA-Bench paper](https://arxiv.org/abs/2608.23035) was released on arXiv.
 

@@ -40,14 +40,14 @@
           formatter: function (cell) { return cell.getRow().getPosition(true); },
         },
         {
-          title: "Model", field: "model", minWidth: 165, hozAlign: "left", headerHozAlign: "left",
+          title: "Model", field: "model", minWidth: 210, hozAlign: "left", headerHozAlign: "left",
           formatter: function (cell) {
             const d = cell.getRow().getData();
             return "<span class='model-name'>" + d.model + "</span>" +
                    "<span class='model-org'>" + d.org + "</span>";
           },
         },
-        { title: "Size / Access", field: "access", minWidth: 115, headerSort: false },
+        { title: "Size / Access", field: "access", minWidth: 135, headerSort: false },
         { title: "Overall", field: "overall", width: 95, sorter: "number", formatter: pctFormatter(best, "overall"), cssClass: "col-overall" },
         { title: "Tool Use", field: "basic", sorter: "number", formatter: pctFormatter(best, "basic") },
         { title: "Memory", field: "memory", sorter: "number", formatter: pctFormatter(best, "memory") },
