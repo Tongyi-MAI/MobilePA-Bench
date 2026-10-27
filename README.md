@@ -25,7 +25,7 @@
 
 <p align="center">
   <a href="https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard">
-    <img src="github-pages/static/images/leaderboard.jpg" alt="MobilePA-Bench leaderboard" width="1100">
+    <img src="github-pages/static/images/leaderboard.jpg?v=20261027-qwen-planner-agent" alt="MobilePA-Bench leaderboard" width="1100">
   </a>
 </p>
 
@@ -46,7 +46,7 @@
 
 ## News
 
-- **2026-10-27:** Added Qwen-Planner-Agent to the public leaderboard and synchronized model naming across the leaderboard and cost analysis.
+- **2026-10-27:** Added **Qwen-Planner-Agent (27B)**, which ranks first Overall at **77.05%** and leads Tool Use at **77.79%**; introduced the [Performance vs. Cost analysis](https://tongyi-mai.github.io/MobilePA-Bench/#efficiency) and refreshed the README leaderboard preview.
 - **2026-10-21:** Expanded the public leaderboard to 20 models and synchronized the project page and README results.
 - **2026-10-19:** Updated the [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and documentation for the revised [paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf), including evidence-aligned verification, capability gates, 1,905 scored trajectories per model, expanded frontier-model analysis, and an exploratory online-RL baseline.
 - **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).
