@@ -2,6 +2,7 @@
 // Overall = 0.5*Tool Use + 0.2*Memory + 0.2*Skills + 0.1*Sub-agent.
 // Skills is the equal average of SOR and MTSR setting-specific success.
 const LEADERBOARD_DATA = [
+  { model: "Qwen-Planner-Agent",        org: "Alibaba",   access: "27B",           overall: 77.05, basic: 77.79, memory: 74.76, skills: 86.25, subagent: 59.55 },
   { model: "GPT-6-Astra",               org: "OpenAI",    access: "Closed source", overall: 76.87, basic: 75.77, memory: 74.73, skills: 93.25, subagent: 53.93 },
   { model: "Claude-Opus-5",             org: "Anthropic", access: "Closed source", overall: 75.71, basic: 77.60, memory: 71.81, skills: 83.00, subagent: 59.55 },
   { model: "Claude-Fable-5",            org: "Anthropic", access: "Closed source", overall: 74.53, basic: 77.21, memory: 76.33, skills: 69.00, subagent: 68.54 },

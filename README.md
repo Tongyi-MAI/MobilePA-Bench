@@ -29,8 +29,9 @@
   </a>
 </p>
 
-- No model leads all four capability dimensions; the full capability vector is therefore more informative than Overall alone.
-- Sub-agent Collaboration has the lowest cross-model mean (**53.71%**), while Skill Usage has the widest observed range (**39.50 points**).
+- **Qwen-Planner-Agent (27B)** ranks first Overall at **77.05%** and leads Tool Use at **77.79%**.
+- No evaluated system leads all four capability dimensions; the full capability vector is therefore more informative than Overall alone.
+- Sub-agent Collaboration has the lowest cross-system mean (**53.99%**), while Skill Usage has the widest observed range (**39.50 points**).
 - An exploratory online-RL checkpoint initialized from Qwen-3.8-27B improves Overall from **66.94%** to **69.25%** (**+2.31 points**) in the same sandbox.
 
 ## Highlights
@@ -39,12 +40,13 @@
 - **Executable and stateful:** 212 mobile tools operate over mutable application records, dependencies, and structured runtime feedback.
 - **Evidence-aligned verification:** every query is assigned a fixed Tool Call, State Change, or Agent Behavior checker according to its completion semantics.
 - **Capability-gated evaluation:** Memory tasks enforce annotated retrieval and action requirements; Skill-Only Routing requires a complete skill route before business-tool use.
-- **Diagnostic scale:** 1,705 distinct queries span eight descriptive query domains and 30 subclasses, producing 1,905 scored trajectories per model.
-- **Broad model study:** 20 open- and closed-weight frontier LLMs are evaluated with the same reference harness and function-calling interface.
+- **Diagnostic scale:** 1,705 distinct queries span eight descriptive query domains and 30 subclasses, producing 1,905 scored trajectories per evaluated system.
+- **Broad model study:** the public leaderboard compares 20 open- and closed-weight frontier LLMs and the complete Qwen-Planner-Agent system under the same MobilePA-Bench protocol.
 - **Planner development:** the same sandbox supports online reinforcement learning; an exploratory Qwen-3.8-27B checkpoint improves Overall by 2.31 percentage points.
 
 ## News
 
+- **2026-10-27:** Added Qwen-Planner-Agent to the public leaderboard and synchronized model naming across the leaderboard and cost analysis.
 - **2026-10-21:** Expanded the public leaderboard to 20 models and synchronized the project page and README results.
 - **2026-10-19:** Updated the [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and documentation for the revised [paper](https://tongyi-mai.github.io/MobilePA-Bench/MobilePA-Bench.pdf), including evidence-aligned verification, capability gates, 1,905 scored trajectories per model, expanded frontier-model analysis, and an exploratory online-RL baseline.
 - **2026-08-25:** The project repository was opened with an interactive [project page](https://tongyi-mai.github.io/MobilePA-Bench/), [leaderboard](https://tongyi-mai.github.io/MobilePA-Bench/#leaderboard), and a [private-evaluation link](https://116.62.42.171/login?next=/submit).

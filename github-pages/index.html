@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="static/vendor/bulma/bulma.min.css">
   <link rel="stylesheet" href="static/vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="static/vendor/tabulator/css/tabulator.min.css">
-  <link rel="stylesheet" href="static/css/style.css?v=affiliation-logo-20261019">
+  <link rel="stylesheet" href="static/css/style.css?v=cost-chart-20261027">
   <link rel="stylesheet" href="static/css/replay-demo.css?v=20260817-icons">
 </head>
 <body>
@@ -75,7 +75,7 @@
   <!-- ===== benchmark snapshot ===== -->
   <section class="snapshot-strip" aria-label="MobilePA-Bench at a glance">
     <div class="snapshot-item"><strong>1,705</strong><span>Distinct queries</span></div>
-    <div class="snapshot-item"><strong>1,905</strong><span>Scored trajectories / model</span></div>
+    <div class="snapshot-item"><strong>1,905</strong><span>Scored trajectories / system</span></div>
     <div class="snapshot-item"><strong>212</strong><span>Executable mobile tools</span></div>
     <div class="snapshot-item"><strong>4</strong><span>Planner capabilities</span></div>
   </section>
@@ -90,8 +90,8 @@
         Scores follow the revised setting-specific success criteria. Click any column header to sort.
       </p>
       <div class="leader-highlights" aria-label="Leading benchmark results">
-        <div><span>Overall</span><strong>76.87</strong><small>GPT-6-Astra</small></div>
-        <div><span>Tool Use</span><strong>77.60</strong><small>Claude-Opus-5</small></div>
+        <div><span>Overall</span><strong>77.05</strong><small>Qwen-Planner-Agent</small></div>
+        <div><span>Tool Use</span><strong>77.79</strong><small>Qwen-Planner-Agent</small></div>
         <div><span>Memory</span><strong>76.33</strong><small>Claude-Fable-5</small></div>
         <div><span>Skills</span><strong>93.25</strong><small>GPT-6-Astra</small></div>
         <div><span>Sub-agent</span><strong>68.54</strong><small>Claude-Fable-5</small></div>
@@ -100,6 +100,29 @@
       <p class="sec-sub" style="margin-top:1rem; font-size:.85rem;">
         All values are percentages (%). Skills averages success under Skill-Only Routing and Mixed Tool-Skill Routing.
         Best value per column is highlighted. The table reports the latest public benchmark results.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== efficiency and cost ===== -->
+  <section id="efficiency" class="section-mpa cost-section">
+    <div class="inner">
+      <p class="section-kicker">Efficiency and cost</p>
+      <h2 class="sec-title">Performance vs. Cost</h2>
+      <p class="sec-sub">Higher overall accuracy at lower estimated output cost is better.</p>
+
+      <div class="cost-chart-card">
+        <div class="cost-chart-viewport" tabindex="0" aria-label="Scrollable performance versus cost chart">
+          <div id="cost-accuracy-chart"></div>
+        </div>
+        <p class="cost-chart-mobile-axis" aria-hidden="true">Output cost (USD / 1K tasks)</p>
+        <p class="cost-chart-swipe" aria-hidden="true">Swipe to compare all systems &rarr;</p>
+      </div>
+      <p class="cost-chart-note">
+        Output cost includes model output and thinking tokens; input and evaluation costs are excluded.
+        The x-axis omits $22&ndash;60 while preserving the same linear scale on both sides.
+        Claude-Fable-5 uses a provisional 192/200-sample estimate.
+        See the <a href="https://arxiv.org/pdf/2609.29892" target="_blank" rel="noopener noreferrer">technical report</a> for details.
       </p>
     </div>
   </section>
@@ -272,11 +295,11 @@
 
     <!-- Benchmark Statistics -->
     <h3 class="subsec-title">Benchmark Statistics</h3>
-    <p class="subsec-sub">1,705 distinct queries produce 1,905 scored trajectories per model because each of the
+    <p class="subsec-sub">1,705 distinct queries produce 1,905 scored trajectories per evaluated system because each of the
        200 Skill queries is evaluated under both SOR and MTSR.</p>
     <div class="mini-stats" style="grid-template-columns:repeat(6,1fr);">
       <div class="pill"><div class="n">1,705</div><div class="t">Distinct Queries</div></div>
-      <div class="pill"><div class="n">1,905</div><div class="t">Scored Trajectories / Model</div></div>
+      <div class="pill"><div class="n">1,905</div><div class="t">Scored Trajectories / System</div></div>
       <div class="pill"><div class="n">212</div><div class="t">Mobile Tools</div></div>
       <div class="pill"><div class="n">8</div><div class="t">Query Domains</div></div>
       <div class="pill"><div class="n">30</div><div class="t">Query Subclasses</div></div>
@@ -353,8 +376,10 @@
   <script src="static/js/replay_demo_data.js?v=capability-order-20260819"></script>
   <script src="static/js/replay_demo.js"></script>
   <script src="static/vendor/tabulator/js/tabulator.min.js"></script>
-  <script src="static/js/leaderboard_data.js?v=leaderboard-20261021"></script>
-  <script src="static/js/leaderboard.js?v=leaderboard-20261021"></script>
+  <script src="static/js/leaderboard_data.js?v=leaderboard-20261027-qwen-agent"></script>
+  <script src="static/js/leaderboard.js?v=leaderboard-20261027-qwen-agent"></script>
+  <script src="static/js/cost_accuracy_data.js?v=cost-chart-20261027-aligned-names"></script>
+  <script src="static/js/cost_accuracy.js?v=cost-chart-20261027"></script>
   <script src="static/js/case_studies_data.js?v=capability-order-20260819"></script>
   <script src="static/js/case_studies.js?v=deep-links-position3-20260826"></script>
 </body>
